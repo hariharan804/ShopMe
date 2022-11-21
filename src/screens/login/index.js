@@ -8,6 +8,7 @@ import { InputBox } from "../../components/inputBox";
 import SimpleSnackbar from "../../components/alert";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/AuthService";
+import Cookies from "universal-cookie";
 
 export const Login = (props) => {
   const dispatch = useDispatch();
@@ -23,14 +24,16 @@ export const Login = (props) => {
   const [passwordValue, setPasswordValue] = useState("");
   const [openAlert, setOpenAlert] = useState(false);
   const [viewPassword, setViewPassword] = useState(false);
+  const cookies = new Cookies();
   const onLoginBtn = () => {
     // console.log(mailValue, passwordValue);
     if (mailValue && passwordValue) {
       // {
       //   "username":"johnd","password":"m38rmF$"
       // }
-      localStorage.removeItem("auth");
-    localStorage.setItem('auth', true);
+      let date = new Date();
+      date.setTime(date.getTime() + 3600 * 1000);
+      cookies.set("auth", "true", { path: "/", expires: date });
       dispatch(login(true));
       navigate("/user/home");
     } else {

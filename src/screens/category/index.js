@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import ProductList from '../../components/productList';
-import { getAllProducts, getCategoryByID } from '../../redux/productService';
+import {  getCategoryByID } from '../../redux/productService';
 
 function Categoty() {
  

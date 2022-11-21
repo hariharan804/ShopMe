@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/AuthService";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategory } from "../../redux/productService";
+import Cookies from "universal-cookie";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -43,11 +44,11 @@ export const Header = () => {
   const handleClose = () => {
     setAnchorEl(false);
   };
+  const cookies = new Cookies();
 
   const logout = () => {
     console.log("logout");
-    localStorage.removeItem("auth");
-    localStorage.setItem("auth", false);
+    cookies.set('auth', 'false', { path: '/' }); 
     dispatch(login(false));
     setTimeout(() => {
       navigate("/");
